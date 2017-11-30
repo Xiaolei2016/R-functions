@@ -1,5 +1,18 @@
-# **R-functions**
-## Get or Set work folder path
+# **Information Retrieval with R functions**
+***
+## Overview
+* [Get or Set work folder path](#get-or-set-work-folder-path)
+* [Read file](#read-file-in-r)
+* [Transforming Text](#transforming-text)
+* [Pre-processing data](#pre-processing-data)
+* [Matrix with documents and terms](#matrix-with-documents-and-terms)
+* [tf-idf](#tf-idf)
+* [Calculate distance for documents](#calculate-distance-for-documents)
+* [Cluster documents by using KMeans algorithm](#cluster-documents-by-using-kmeans-algorithm)
+* [Calculate similarity](#calculate-similarity-cosine-similarity-or-jaccard-similarity)
+* [Demo](#demo-cluster-sentences-then-summarize)
+
+### Get or Set work folder path
 ```
 # get work folder path
 getwd()
@@ -7,7 +20,7 @@ getwd()
 # set work folder path
 setwd("C:/tmp/IR")
 ```
-## Read file in R
+### Read file in R
 ```
 # read the file directly if the file has already in the work folder path
 data <- read.table("textfile.txt", header=FALSE, quote = "", sep="\n")
@@ -15,12 +28,12 @@ data <- read.table("textfile.txt", header=FALSE, quote = "", sep="\n")
 # read the file
 data <- read.csv(file="c:/csvfile.csv", header=TRUE, sep=",")
 ```
-## Transforming Text
+### Transforming Text
 ```
 library(tm)  
 corpus <- Corpus(VectorSource(data))
 ```
-## Pre-processing data
+### Pre-processing data
 ```
 # tolower: convert text to lower case
 cleanData <- tm_map(corpus, tolower)
@@ -40,7 +53,7 @@ cleanData <- tm_map(cleanData, stripWhitespace)
 # removeNumber: remove numbers
 cleanData <- tm_map(cleanData, removeNumbers)
 ```
-## Matrix with documents and terms
+### Matrix with documents and terms
 ```
 # matrix with documents as rows and terms as columns for the pre-processed data
 dtm <- DocumentTermMatrix(cleanData)
@@ -48,31 +61,30 @@ dtm <- DocumentTermMatrix(cleanData)
 # matrix with terms as rows and documents as columns for the pre-processed data
 tdm <- TermDocumentMatrix(cleanData)
 ```
-## tf-idf
+### tf-idf
 ```
 # tf-idf
 dtm_tfidf <- weightTfIdf(dtm)
 ```
-## Calculate distance for documents
+### Calculate distance for documents
 ```
 # method can be one of "euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski"
 d_distance <- dist(dtm_tfidf,method = "euclidean")
 ```
-## Cluster documents by using KMeans algorithm
+### Cluster documents by using KMeans algorithm
 ```
 # get clusters by using kmeans algorithm
 results <- kmeans(d_distance, 3)
 ```
-## Calculate similarity (cosine similarity or jaccard similarity)
+### Calculate similarity (cosine similarity or jaccard similarity)
 ```
-library(text2vec)
 # calculate cosine similarity for all documents
 cos_sim = sim2(as.matrix(new_dtm_tfidf), method = "cosine")
 
 # calculate cosine similarity for all documents
 jac_sim = sim2(sparse_matrices, method = "jaccard", norm = "l2")
 ```
-## Demo-Cluster sentences then summarize
+### Demo-Cluster sentences then summarize
 ```
 data <- c("Best Toyota dealer in bay area. Drive out with a new car today",
                         "Largest Selection of Furniture. Stock updated everyday" , 
