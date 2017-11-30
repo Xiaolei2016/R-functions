@@ -65,6 +65,7 @@ results <- kmeans(d_distance, 3)
 ```
 ## Calculate similarity (cosine similarity or jaccard similarity)
 ```
+library(text2vec)
 # calculate cosine similarity for all documents
 cos_sim = sim2(as.matrix(new_dtm_tfidf), method = "cosine")
 
