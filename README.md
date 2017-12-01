@@ -1,6 +1,7 @@
 # **Information Retrieval with R functions**
 ***
 ## Overview
+* [Installation](#installation)
 * [Get or Set work folder path](#get-or-set-work-folder-path)
 * [Read file](#read-file-in-r)
 * [Transforming Text](#transforming-text)
@@ -11,7 +12,10 @@
 * [Cluster documents by using KMeans algorithm](#cluster-documents-by-using-kmeans-algorithm)
 * [Calculate similarity](#calculate-similarity-cosine-similarity-or-jaccard-similarity)
 * [Demo](#demo-cluster-sentences-then-summarize)
-
+### Installation
+[R](https://cran.r-project.org/)
+[RStudio](https://www.rstudio.com/)
+[Anaconda](https://www.anaconda.com/download/)
 ### Get or Set work folder path
 ```
 # get work folder path
